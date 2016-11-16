@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: 确认收货
+Plugin Name: 自动确认收货
 Plugin URI: http://www.ecjia.com/plugins/ecjia.cron_order_receive/
-Description: 确认收货
+Description: 计划任务-订单自动确认收货
 Author: ECJIA TEAM
 Version: 1.0.0
 Author URI: http://www.ecjia.com/
@@ -24,11 +24,6 @@ class plugin_cron_order_receive {
 		return RC_Api::api('cron', 'plugin_uninstall', $param);
 	}
 
-// 	public static function adapter_instance($instance, $config) {
-// 		require_once RC_Plugin::plugin_dir_path(__FILE__) . 'cron_order_receive.class.php';
-// 		return new cron_order_receive($config);
-// 	}
-
 }
 
 Ecjia_PluginManager::extend('cron_order_receive', function() {
@@ -38,6 +33,5 @@ Ecjia_PluginManager::extend('cron_order_receive', function() {
 
 RC_Plugin::register_activation_hook(__FILE__, array('plugin_cron_order_receive', 'install'));
 RC_Plugin::register_deactivation_hook(__FILE__, array('plugin_cron_order_receive', 'uninstall'));
-// RC_Hook::add_filter('cron_factory_adapter_instance', array( 'plugin_cron_order_receive', 'adapter_instance' ), 10, 2);
 
 // end
