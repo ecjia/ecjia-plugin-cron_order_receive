@@ -13,8 +13,8 @@ class cron_order_receive extends cron_abstract
      * 计划任务执行方法
      */
     public function run() {
-        $limit = !empty($this->config['order_receive_day']) ? $this->config['order_receive_day'] : 15;
-        $limit = $limit * 86400;
+        $limit_time = !empty($this->config['order_receive_day']) ? $this->config['order_receive_day'] : 15;
+        $limit_time = $limit_time * 86400;
         RC_Loader::load_app_class('order_operate', 'orders');
         $order_operate = new order_operate();
         $time = RC_Time::gmtime();
@@ -24,13 +24,13 @@ class cron_order_receive extends cron_abstract
         ->where(RC_DB::raw('shipping_time'), '>', 0)
 //         ->where(RC_DB::raw('shipping_time'), '>', $time - 31 * 86400)
         ->where(RC_DB::raw('shipping_status'), SS_SHIPPED)
-        ->where(RC_DB::raw('shipping_time + '.$limit), '<=', $time)
+        ->where(RC_DB::raw('shipping_time + '.$limit_time), '<=', $time)
         ->get();
         
         foreach ($rows as $order) {
             $order_operate->operate($order, 'receive', array('action_note' => '自动确认收货'));
         }
-        
+        unset($rows);
     }
     
 	/**
