@@ -15,7 +15,7 @@ class cron_order_receive extends cron_abstract
     public function run() {
         $limit_time = !empty($this->config['order_receive_day']) ? $this->config['order_receive_day'] : 15;
         $limit_time = $limit_time * 86400;
-        RC_Loader::load_app_class('order_operate', 'orders');
+        RC_Loader::load_app_class('order_operate', 'orders', false);
         $order_operate = new order_operate();
         $time = RC_Time::gmtime();
         
