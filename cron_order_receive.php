@@ -72,6 +72,7 @@ class plugin_cron_order_receive {
 }
 
 Ecjia_PluginManager::extend('cron_order_receive', function() {
+    RC_Locale::loadPluginTextdomain('cron_order_receive');
     require_once RC_Plugin::plugin_dir_path(__FILE__) . 'cron_order_receive.class.php';
     return new cron_order_receive();
 });
