@@ -73,7 +73,7 @@ class cron_order_receive extends CronAbstract
             ->get();
         
         foreach ($rows as $order) {
-            $order_operate->operate($order, 'receive', array('action_note' => '自动确认收货'));
+            $order_operate->operate($order, 'receive', array('action_note' => __('自动确认收货', 'cron_order_receive')));
         }
         unset($rows);
     }
